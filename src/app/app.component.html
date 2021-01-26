@@ -1,0 +1,254 @@
+
+<!-- <app-employee></app-employee> -->
+<!-- <app-user-list></app-user-list> -->
+
+<!-- <app-two-way-data [(size)]="fontSizePx"></app-two-way-data>
+{{fontSizePx}} -->
+
+
+<div id="layoutSidenav">
+  <div id="layoutSidenav_nav">
+      <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+          <div class="sb-sidenav-menu customScroll">
+              <div class="nav">
+                  <a class="logo"><img src="assets/images/logo.png" alt=""></a>
+                  <ul class="menu-list">
+                    <li *ngFor="let item of menu">
+                      <h6 *ngIf="item.subTitle">{{item.subTitle}}</h6>
+                      <a class="nav-link"  [routerLink]="item.url">
+                          <div class="sb-nav-link-icon"><i [ngClass]="item.icon"></i>
+                            {{item.name}}
+                          </div>
+                          <span class="link-right">
+                            <span class="count" *ngIf="item.count">{{item.count}}</span>
+                            <span class="kit-count" *ngIf="item.kitCount">{{item.kitCount}}</span>
+                            <span class="page-count" *ngIf="item.pagesCount">{{item.pagesCount}}</span>
+                            <span class="new" *ngIf="item.status">{{item.status}}</span>
+                            <span class="sub-arrow" *ngIf="item.childs"><i class="fa fa-caret-down"></i></span>
+                          </span>
+                      </a>
+                    </li>
+                  </ul>
+              </div>
+          </div>
+          <div class="sb-sidenav-footer">
+             <div class="user-login">
+               <span class="user-pic"><img src="assets/images/user.jpg" alt=""></span>
+               <span class="user-login-info">
+                 <h5>Jean Reyes</h5>
+                 <span class="status">
+                   <i class="fa fa-circle"></i>
+                   <span class="status-info">Online</span>
+                 </span>
+               </span>
+
+             </div>
+          </div>
+      </nav>
+  </div>
+  <div id="layoutSidenav_content">
+      <main>
+        <nav class="sb-topnav navbar navbar-expand navbar">
+        <div class="navbar-left">
+          <a class="navbar-brand" href="index.html">Dashboard</a>
+          <button class="btn btn-link"><i class="fa fa-plus"></i> New</button>
+        </div>
+        <div class="navbar-left">
+          <!-- Navbar Search-->
+          <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+              <div class="input-group">
+                  <input class="form-control" type="text" placeholder="Search projects" aria-label="Search" aria-describedby="basic-addon2" />
+                  <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button"><i class="fa fa-search"></i></button>
+                  </div>
+              </div>
+          </form>
+          <!-- Navbar-->
+          <ul class="profile-ul">
+              <li><a class="fa fa-arrows-v " ></a></li>
+              <li><a class="fa fa-bell-o notifications" >
+                <span class="count">3</span>
+              </a></li>
+              <li><a class="user" (click)="logout()"><img src="assets/images/user.jpg" alt=""></a></li>
+          </ul>
+        </div>
+        </nav>
+        <div class="breadcrumb">
+          <div class="breadcrumb-left">
+            <h5>Welcome to flatkit</h5>
+            <span>Bootstrap 4 webkit app with angular</span>
+          </div>
+          <div class="breadcrumb-right">
+            Start manage: projects
+          </div>
+          <div class="app-settings">
+            <ul>
+              <li><span class="fa fa-cog"></span></li>
+              <li class="active"><span class="fa fa-list"></span></li>
+            </ul>
+          </div>
+        </div>
+          <div class="container-fluid py-3">
+              <!-- <h1 class="mt-4">Dashboard</h1>
+              <ol class="breadcrumb mb-4">
+                  <li class="breadcrumb-item active">Dashboard</li>
+              </ol> -->
+              <!-- <breadcrumb [allowBootstrap]="true"></breadcrumb> -->
+              <!-- <router-outlet></router-outlet> -->
+              <div class="row">
+                <div class="col info-widget">
+                  <div class="info-widget-data">
+                    <span class="info-left email-bg">
+                      <i class="fa fa-envelope-open"></i>
+                    </span>
+                    <span class="info-right">
+                      <div class="info-count"><b>{{testInfo?.info?.emails}}</b>Emails</div>
+                      <span class="info-below">6 new arrivals</span>
+                    </span>
+                  </div>
+                </div>
+                <div class="col info-widget">
+                  <div class="info-widget-data">
+                    <span class="info-left project-bg">
+                      <i class="fa fa-product-hunt"></i>
+                    </span>
+                    <span class="info-right">
+                      <div class="info-count"><b>{{testInfo?.info?.projects}}</b>Projects</div>
+                      <span class="info-below">38 open</span>
+                    </span>
+                  </div>
+                </div>
+                <div class="col info-widget">
+                  <div class="info-widget-data">
+                    <span class="info-left user-bg">
+                      <i class="fa fa-users"></i>
+                    </span>
+                    <span class="info-right">
+                      <div class="info-count"><b>{{testInfo?.info?.users}}</b>Users</div>
+                      <span class="info-below">638 vips</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col">
+                  <div class="chart-widget">
+                    <div class="chart-header">
+                      <div class="chart-header-left">
+                        <h5>Projects monitor</h5>
+                        <span>Calculated in last 30 days</span>
+                      </div>
+                      <div class="chart-header-right">
+                        <i class="fa fa-refresh"></i>
+                        <i class="fa fa-ellipsis-v ml-2"></i>
+                      </div>
+                    </div>
+                    <div [chart]="chart"></div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="chart-widget">
+                    <div class="chart-header">
+                      <div class="chart-header-left">
+                        <h5>Tasks</h5>
+                        <span>Calculated in last 7 days</span>
+                      </div>
+                      <div class="chart-header-right">
+                        <i class="fa fa-refresh"></i>
+                        <i class="fa fa-ellipsis-v ml-2"></i>
+                      </div>
+                    </div>
+                    <div [chart]="chart2"></div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="chart-widget">
+                    <div class="chart-header">
+                      <div class="chart-header-left">
+                        <h5>Sales</h5>
+                        <span>Calculated in last 7 days</span>
+                      </div>
+                      <div class="chart-header-right">
+                        <i class="fa fa-refresh"></i>
+                        <i class="fa fa-ellipsis-v ml-2"></i>
+                      </div>
+                    </div>
+                    <div [chart]="chart3"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col">
+                  <div class="open-projects-widget">
+                    <div class="open-projects-widget-header">
+                      <div class="open-projects-widget-header-left">
+                        <div class="open-projects-widget-title">Open Projects <span>6</span></div>
+                        <span class="sub-title">Your data status</span>
+                      </div>
+                      <div class="open-projects-widget-header-right"></div>
+                    </div>
+                    <ul class="open-projects-widget-list">
+                      <li *ngFor="let project of openProjects">
+                        <span class="square">{{project.title.charAt(0)}}</span>
+                        <div class="project-info">
+                          <h5>{{project.title}}</h5>
+                          <span><b>{{project.tasks}}</b> tasks</span>,
+                          <span><b>{{project.issues}}</b> issues</span>
+                        </div>
+                        <span class="project-edit">
+                          manage 
+                          <i class="fa fa-pencil ml-2"></i>
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="open-projects-widget h-100">
+                    <div class="open-projects-widget-header">
+                    <div class="open-projects-widget-header-left">
+                      
+                      <div class="open-projects-widget-title">Stats </div>
+                      <span class="sub-title">Your data status</span>
+                    </div>
+                    <div class="open-projects-widget-header-right">
+                      <span class="fa fa-refresh"></span>
+                      <span class="fa fa-ellipsis-v"></span>
+                    </div>
+
+                    </div>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th style="width: 70px;">Graph</th>
+                          <th>Item</th>
+                          <th style="width: 20px;"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let row of stats">
+                          <td>
+                            <img [src]="row.graph" alt="">
+                          </td>
+                          <td>
+                            {{row.item}}
+                          </td>
+                          <td >
+                            <span class="td-custom" [ngClass]="row.level === 'up' ? 'text-success' : 'text-danger'">
+                              <span class="pr-1 fa fa-level-up" *ngIf="row.level === 'up'"></span>
+                              <span class="pr-1 fa fa-level-down" *ngIf="row.level === 'down'"></span>
+                              <span>
+                                {{row.percentage}}%
+                              </span>
+                            </span>
+                              </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+          </div>
+      </main>
+  </div>
+</div>
